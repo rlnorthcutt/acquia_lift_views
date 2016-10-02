@@ -1,0 +1,9 @@
+name: Acquia Lift Views
+type: module
+description: Provides integration between Acquia Lift segments and Drupal Views
+core: 8.x
+package: Acquia
+dependencies:
+#  - acquia_lift
+  - views
+  - views_cookie

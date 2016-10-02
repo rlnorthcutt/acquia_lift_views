@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains acquia_lift_views.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function acquia_lift_views_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the acquia_lift_views module.
+    case 'help.page.acquia_lift_views':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides integration between Acquia Lift segments and Drupal Views') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Queues an update for the LiftSegment field.
+ */
+function acquia_lift_views_cron() {
+  $queue = \Drupal::queue('lift_segment_field_update');
+  // @TODO: This needs to be set by an admin config.
+  $process = TRUE;
+  $queue->createItem($process);
+}
